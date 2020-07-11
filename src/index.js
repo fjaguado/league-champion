@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '@marketgoo/ola/dist/index.css';
 import './index.css';
-
-import List from './components/List';
 import { Provider } from 'react-redux';
 import playersReducer from './store/reducers/players';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
