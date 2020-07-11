@@ -3,10 +3,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: 'development',
+    devtool: 'inline-source-map',
     entry: './src/index.js',
     output: {
         path: path.resolve(__dirname, 'public'),
-        filename: '[name].js'
+        filename: '[name].js',
     },
     module: {
         rules: [
@@ -16,9 +17,9 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-react']
-                    }
-                }
+                        presets: ['@babel/preset-react'],
+                    },
+                },
             },
             {
                 test: /\.css$/,
@@ -31,10 +32,8 @@ module.exports = {
                     },
                     'css-loader',
                 ],
-            }
-        ]
+            },
+        ],
     },
-    plugins: [
-        new MiniCssExtractPlugin()
-    ]
-}
+    plugins: [new MiniCssExtractPlugin()],
+};
