@@ -34,11 +34,7 @@ class List extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const { name, team, score } = this.state;
-        axios.post('/players', { name, team, score }).then(() => {
-            axios.get('/players').then(response => {
-                this.setState({ data: response.data });
-            });
-        });
+        this.props.onAddPlayer({ name, team, score });
     }
 
     handleDelete(id) {
@@ -107,7 +103,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchPlayers: () => dispatch(playersActions.fetchPlayers()),
-        onSetPlayers: players => dispatch({ type: playersActions.SET_PLAYERS, players }),
+        onSetPlayers: players => dispatch(playersActions.setPlayers(players)),
+        onAddPlayer: player => dispatch(playersActions.addPlayer(player)),
     };
 };
 

@@ -14,13 +14,35 @@ export const fetchPlayers = () => {
                 throw new Error('Something went wrong!');
             }
 
-            const loadedPlayers = [];
+            setPlayers(response.data.data);
+        } catch (e) {
+            throw e;
+        }
+    };
+};
 
-            response.data.data.map(player => {
-                console.log(player);
-                loadedPlayers.push(new Player(player.id, player.name, player.team, player.score));
-            });
-            dispatch({ type: SET_PLAYERS, players: loadedPlayers });
+export const setPlayers = players => {
+    return async dispatch => {
+        const loadedPlayers = [];
+
+        players.map(player => {
+            console.log(player);
+            loadedPlayers.push(new Player(player.id, player.name, player.team, player.score));
+        });
+        dispatch({ type: SET_PLAYERS, players: loadedPlayers });
+    };
+};
+
+export const addPlayer = player => {
+    return async dispatch => {
+        try {
+            const response = await axios.post('/players', player);
+
+            if (response.status !== 200) {
+                throw new Error('Something went wrong!');
+            }
+
+            dispatch({ type: ADD_PLAYER, player });
         } catch (e) {
             throw e;
         }
