@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import * as playersActions from '../store/actions/players.actions';
 import { subscribeToPlayers } from '../utils/socket';
 
+import List from './List';
+
 class Players extends Component {
     constructor(props) {
         super(props);
@@ -35,32 +37,7 @@ class Players extends Component {
         return (
             <>
                 <h1>League Champion</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <td>Player</td>
-                            <td>Team</td>
-                            <td>Score</td>
-                            <td>Actions</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.players &&
-                            this.props.players.map(player => (
-                                <tr>
-                                    <td>{player.name}</td>
-                                    <td>{player.team}</td>
-                                    <td>{player.score}</td>
-                                    <td>
-                                        <button
-                                            onClick={() => this.props.onDeletePlayer(player.id)}>
-                                            Remove
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                    </tbody>
-                </table>
+                <List players={this.props.players} onDelete={this.props.onDeletePlayer} />
                 <br />
                 <form onSubmit={this.handleSubmit}>
                     <h4>Add new players</h4>
