@@ -1,29 +1,23 @@
-import React, { Component, useCallback, useEffect } from 'react';
-import { useDispatch, useSelector, connect } from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import * as playersActions from '../store/actions/players.actions';
-import axios from 'axios';
 import { subscribeToPlayers } from '../utils/socket';
 
 class List extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: null,
             name: null,
             team: null,
             score: null,
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
 
         subscribeToPlayers((err, data) => this.props.onSetPlayers(data));
     }
 
     componentDidMount() {
-        axios.get('/players').then(response => {
-            this.setState({ data: response.data });
-        });
         this.props.onFetchPlayers();
     }
 
@@ -37,17 +31,7 @@ class List extends Component {
         this.props.onAddPlayer({ name, team, score });
     }
 
-    handleDelete(id) {
-        axios.delete(`/players/${id}`).then(() => {
-            axios.get('/players').then(response => {
-                this.setState({ data: response.data });
-            });
-        });
-    }
-
     render() {
-        const players = this.state.data;
-
         return (
             <>
                 <table>
@@ -61,13 +45,14 @@ class List extends Component {
                     </thead>
                     <tbody>
                         {this.props.players &&
-                            this.props.players.map(x => (
+                            this.props.players.map(player => (
                                 <tr>
-                                    <td>{x.name}</td>
-                                    <td>{x.team}</td>
-                                    <td>{x.score}</td>
+                                    <td>{player.name}</td>
+                                    <td>{player.team}</td>
+                                    <td>{player.score}</td>
                                     <td>
-                                        <button onClick={() => this.handleDelete(x.id)}>
+                                        <button
+                                            onClick={() => this.props.onDeletePlayer(player.id)}>
                                             Remove
                                         </button>
                                     </td>
@@ -78,15 +63,9 @@ class List extends Component {
                 <br />
                 <form onSubmit={this.handleSubmit}>
                     <h4>Add new players</h4>
-                    <input
-                        name="name"
-                        placeholder="player name"
-                        onChange={this.handleChange}></input>
-                    <input name="team" placeholder="team name" onChange={this.handleChange}></input>
-                    <input
-                        name="score"
-                        placeholder="team score"
-                        onChange={this.handleChange}></input>
+                    <input name="name" placeholder="player name" onChange={this.handleChange} />
+                    <input name="team" placeholder="team name" onChange={this.handleChange} />
+                    <input name="score" placeholder="team score" onChange={this.handleChange} />
                     <button>Add</button>
                 </form>
             </>
@@ -105,6 +84,7 @@ const mapDispatchToProps = dispatch => {
         onFetchPlayers: () => dispatch(playersActions.fetchPlayers()),
         onSetPlayers: players => dispatch(playersActions.setPlayers(players)),
         onAddPlayer: player => dispatch(playersActions.addPlayer(player)),
+        onDeletePlayer: playerId => dispatch(playersActions.deletePlayer(playerId)),
     };
 };
 

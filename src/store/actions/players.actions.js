@@ -48,3 +48,19 @@ export const addPlayer = player => {
         }
     };
 };
+
+export const deletePlayer = playerId => {
+    return async dispatch => {
+        try {
+            const response = await axios.delete(`/players/${playerId}`);
+
+            if (response.status !== 200) {
+                throw new Error('Something went wrong!');
+            }
+
+            dispatch({ type: DELETE_PLAYER, playerId });
+        } catch (e) {
+            throw e;
+        }
+    };
+};
