@@ -8,6 +8,7 @@ import playersReducer from './store/reducers/players';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import Players from './components/Players';
 
 const reducer = combineReducers({
     players: playersReducer,
@@ -18,8 +19,7 @@ const store = createStore(reducer, composeWithDevTools(applyMiddleware(ReduxThun
 const Root = () => {
     return (
         <Provider store={store}>
-            <h1>League Champion</h1>
-            <List />
+            <Players />
         </Provider>
     );
 };
