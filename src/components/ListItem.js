@@ -25,15 +25,15 @@ const ListItem = props => {
                     variant="destructive-primary">
                     Delete
                 </Button>
-                <ConfirmModal
-                    title="You are about to delete this item"
-                    question="Are you sure?"
-                    confirmLabel="Yes, delete it"
-                    isOpen={isModalOpen}
-                    onCancel={() => setIsModalOpen(false)}
-                    onConfirm={onDelete}
-                />
             </TableCell>
+            <ConfirmModal
+                title="You are about to delete this item"
+                question="Are you sure?"
+                confirmLabel="Yes, delete it"
+                isOpen={isModalOpen}
+                onCancel={() => setIsModalOpen(false)}
+                onConfirm={onDelete}
+            />
         </TableRow>
     );
 };
