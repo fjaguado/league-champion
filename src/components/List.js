@@ -13,7 +13,9 @@ const List = props => {
                     <TableCell header>Player</TableCell>
                     <TableCell header>Team</TableCell>
                     <TableCell header>Score</TableCell>
-                    <TableCell header>Actions</TableCell>
+                    <TableCell header variant="right">
+                        Actions
+                    </TableCell>
                 </TableRow>
             </thead>
             <tbody>

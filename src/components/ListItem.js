@@ -18,7 +18,7 @@ const ListItem = props => {
             <TableCell header={false}>{props.item.name}</TableCell>
             <TableCell header={false}>{props.item.team}</TableCell>
             <TableCell header={false}>{props.item.score}</TableCell>
-            <TableCell header={false}>
+            <TableCell header={false} variant="right">
                 <Button
                     as="button"
                     onClick={() => setIsModalOpen(true)}
