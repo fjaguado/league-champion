@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '@marketgoo/ola/dist/Modal';
 import ModalHeader from '@marketgoo/ola/dist/Modal/Header';
 import ModalContent from '@marketgoo/ola/dist/Modal/Content';
-import Input from '@marketgoo/ola/dist/Input';
 import Field from '@marketgoo/ola/dist/Field';
 import Button from '@marketgoo/ola/dist/Button';
 
 const AddPlayer = props => {
     const [player, setPlayer] = useState({ name: null, team: null, score: null });
+    const [isDisabled, setIsDisabled] = useState(true);
 
     const handleChange = event => {
-        console.log(event);
         setPlayer({ ...player, [event.target.name]: event.target.value });
+    };
+
+    useEffect(() => {
+        console.log(player);
+        setIsDisabled(!formIsValid());
+    }, [player]);
+
+    const formIsValid = () => {
+        return (
+            player.name &&
+            player.name.length > 0 &&
+            player.team &&
+            player.team.length > 0 &&
+            player.score &&
+            player.score.length > 0
+        );
     };
 
     const handleSubmit = event => {
         event.preventDefault();
+        if (!formIsValid()) {
+            return;
+        }
         props.onSubmit(player);
     };
 
@@ -61,7 +79,7 @@ const AddPlayer = props => {
                             onChange={handleChange}
                         />
                     </Field>
-                    <Button as="button" variant="primary">
+                    <Button as="button" variant="primary" disabled={isDisabled}>
                         Add new player
                     </Button>
                 </form>
