@@ -20,7 +20,7 @@ class Players extends Component {
         return (
             <>
                 <h1 className="title">League Champion</h1>
-                <List players={this.props.players} onDelete={this.props.onDeletePlayer} />
+                <List items={this.props.players} onDelete={this.props.onDeletePlayer} />
                 <br />
                 <AddPlayer onSubmit={this.props.onAddPlayer} />
             </>

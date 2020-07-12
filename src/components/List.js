@@ -16,10 +16,8 @@ const List = props => {
                 </TableRow>
             </thead>
             <tbody>
-                {props.players &&
-                    props.players.map(player => (
-                        <ListItem player={player} onDelete={props.onDelete} />
-                    ))}
+                {props.items &&
+                    props.items.map(item => <ListItem item={item} onDelete={props.onDelete} />)}
             </tbody>
         </Table>
     );
