@@ -5,7 +5,9 @@ import { subscribeToPlayers } from '../utils/socket';
 
 import List from './List';
 import AddPlayer from './AddPlayer';
-import Spinner from '@marketgoo/ola/dist/Spinner';
+import Button from '@marketgoo/ola/dist/Button';
+import Panel from '@marketgoo/ola/dist/Panel';
+import PanelContent from '@marketgoo/ola/dist/Panel/Content';
 
 class Players extends Component {
     constructor(props) {
@@ -13,9 +15,11 @@ class Players extends Component {
         this.state = {
             isLoading: false,
             isLoadingItems: false,
+            isAddPlayerFormVisible: false,
         };
         subscribeToPlayers((err, data) => this.props.onSetPlayers(data));
         this.deletePlayerHandler = this.deletePlayerHandler.bind(this);
+        this.addNewPlayer = this.addNewPlayer.bind(this);
     }
 
     async componentDidMount() {
@@ -30,17 +34,36 @@ class Players extends Component {
         this.setState({ isLoading: false });
     }
 
+    async addNewPlayer(player) {
+        this.setState({ isAddPlayerFormVisible: false });
+        await this.props.onAddPlayer(player);
+    }
+
     render() {
         return (
             <>
                 <h1 className="title">League Champion</h1>
-                <List
-                    isLoading={this.state.isLoadingItems}
-                    items={this.props.players}
-                    onDelete={this.deletePlayerHandler}
+                <Button
+                    as="button"
+                    className="add-players-button"
+                    onClick={() => this.setState({ isAddPlayerFormVisible: true })}
+                    variant="primary">
+                    Add new player
+                </Button>
+                <AddPlayer
+                    isFormVisible={this.state.isAddPlayerFormVisible}
+                    onSubmit={this.addNewPlayer}
+                    onCancel={() => this.setState({ isAddPlayerFormVisible: false })}
                 />
-                <br />
-                <AddPlayer onSubmit={this.props.onAddPlayer} />
+                <Panel>
+                    <PanelContent>
+                        <List
+                            isLoading={this.state.isLoadingItems}
+                            items={this.props.players}
+                            onDelete={this.deletePlayerHandler}
+                        />
+                    </PanelContent>
+                </Panel>
             </>
         );
     }
