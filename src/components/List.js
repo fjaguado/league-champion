@@ -3,6 +3,7 @@ import Table from '@marketgoo/ola/dist/Table';
 import TableRow from '@marketgoo/ola/dist/Table/Row';
 import TableCell from '@marketgoo/ola/dist/Table/Cell';
 import ListItem from './ListItem';
+import Spinner from '@marketgoo/ola/dist/Spinner';
 
 const List = props => {
     return (
@@ -16,8 +17,16 @@ const List = props => {
                 </TableRow>
             </thead>
             <tbody>
-                {props.items &&
-                    props.items.map(item => <ListItem item={item} onDelete={props.onDelete} />)}
+                {props.isLoading ? (
+                    <tr>
+                        <td colSpan="4" align="center">
+                            <Spinner className={null} size="small" />
+                        </td>
+                    </tr>
+                ) : (
+                    props.items &&
+                    props.items.map(item => <ListItem item={item} onDelete={props.onDelete} />)
+                )}
             </tbody>
         </Table>
     );

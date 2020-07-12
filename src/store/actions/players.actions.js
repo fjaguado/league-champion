@@ -8,13 +8,14 @@ export const DELETE_PLAYER = 'DELETE_PLAYER';
 export const fetchPlayers = () => {
     return async dispatch => {
         try {
+            console.log('Fetch players');
             const response = await axios.get('/players');
 
             if (response.status !== 200) {
                 throw new Error('Something went wrong!');
             }
 
-            setPlayers(response.data.data);
+            dispatch(setPlayers(response.data.data));
         } catch (e) {
             throw e;
         }
@@ -22,7 +23,8 @@ export const fetchPlayers = () => {
 };
 
 export const setPlayers = players => {
-    return async dispatch => {
+    return dispatch => {
+        console.log('Set players');
         const loadedPlayers = [];
 
         players.map(player => {
