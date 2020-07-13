@@ -30,6 +30,7 @@ const ListItem = props => {
                 title="You are about to delete this item"
                 question="Are you sure?"
                 confirmLabel="Yes, delete it"
+                cancelLabel="No, cancel"
                 isOpen={isModalOpen}
                 onCancel={() => setIsModalOpen(false)}
                 onConfirm={onDelete}

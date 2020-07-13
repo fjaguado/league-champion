@@ -12,6 +12,9 @@ const ConfirmModal = props => {
             <ModalContent>
                 <p>{props.question}</p>
                 <ButtonGroup variant="center">
+                    <Button as="button" onClick={props.onCancel} variant="primary">
+                        {props.cancelLabel}
+                    </Button>
                     <Button as="button" onClick={props.onConfirm} variant="destructive-primary">
                         {props.confirmLabel}
                     </Button>
