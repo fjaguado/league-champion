@@ -5,6 +5,7 @@ import ModalContent from '@marketgoo/ola/dist/Modal/Content';
 import Field from '@marketgoo/ola/dist/Field';
 import Button from '@marketgoo/ola/dist/Button';
 import FieldInput from './FieldInput';
+import CustomOlaModal from './CustomOlaModal';
 
 const AddPlayer = props => {
     const [player, setPlayer] = useState({ name: null, team: null, score: null });
@@ -38,7 +39,7 @@ const AddPlayer = props => {
     };
 
     return (
-        <Modal open={props.isFormVisible} onClose={props.onCancel}>
+        <CustomOlaModal open={props.isFormVisible} onClose={props.onCancel}>
             <ModalHeader title="Add new player" />
             <ModalContent>
                 <form onSubmit={handleSubmit}>
@@ -71,7 +72,7 @@ const AddPlayer = props => {
                     </Button>
                 </form>
             </ModalContent>
-        </Modal>
+        </CustomOlaModal>
     );
 };
 
