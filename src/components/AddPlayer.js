@@ -4,6 +4,7 @@ import ModalHeader from '@marketgoo/ola/dist/Modal/Header';
 import ModalContent from '@marketgoo/ola/dist/Modal/Content';
 import Field from '@marketgoo/ola/dist/Field';
 import Button from '@marketgoo/ola/dist/Button';
+import FieldInput from './FieldInput';
 
 const AddPlayer = props => {
     const [player, setPlayer] = useState({ name: null, team: null, score: null });
@@ -14,7 +15,6 @@ const AddPlayer = props => {
     };
 
     useEffect(() => {
-        console.log(player);
         setIsDisabled(!formIsValid());
     }, [player]);
 
@@ -42,43 +42,30 @@ const AddPlayer = props => {
             <ModalHeader title="Add new player" />
             <ModalContent>
                 <form onSubmit={handleSubmit}>
-                    <Field
-                        disabled={false}
-                        error={false}
-                        hint="(required)"
-                        id="name"
-                        label="Player name">
-                        <input
-                            className="ola_input"
-                            name="name"
-                            placeholder="Tsubasa Ōzora"
-                            type="text"
-                            onChange={handleChange}
-                        />
-                    </Field>
-                    <Field disabled={false} error={false} hint="(required)" id="team" label="Team">
-                        <input
-                            className="ola_input"
-                            name="team"
-                            placeholder="Nankatsu"
-                            type="text"
-                            onChange={handleChange}
-                        />
-                    </Field>
-                    <Field
-                        disabled={false}
-                        error={false}
-                        hint="(required)"
-                        id="score"
-                        label="score">
-                        <input
-                            className="ola_input"
-                            name="score"
-                            placeholder="0000"
-                            type="number"
-                            onChange={handleChange}
-                        />
-                    </Field>
+                    <FieldInput
+                        name="name"
+                        placeholder="Tsubasa Ōzora"
+                        required={true}
+                        label="Player name"
+                        type="text"
+                        onChange={handleChange}
+                    />
+                    <FieldInput
+                        name="team"
+                        placeholder="Nankatsu"
+                        required={true}
+                        label="Team"
+                        type="text"
+                        onChange={handleChange}
+                    />
+                    <FieldInput
+                        name="score"
+                        placeholder="0000"
+                        required={true}
+                        label="score"
+                        type="number"
+                        onChange={handleChange}
+                    />
                     <Button as="button" variant="primary" disabled={isDisabled}>
                         Add new player
                     </Button>
