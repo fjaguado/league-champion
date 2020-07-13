@@ -1,0 +1,8 @@
+.title {
+    color: var(--brand);
+    text-align: center;
+}
+
+.add-players-button {
+    margin-bottom: 20px;
+}
