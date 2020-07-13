@@ -1,13 +1,13 @@
 import ModalHeader from '@marketgoo/ola/dist/Modal/Header';
 import ModalContent from '@marketgoo/ola/dist/Modal/Content';
-import Modal from '@marketgoo/ola/dist/Modal';
 import React from 'react';
 import Button from '@marketgoo/ola/dist/Button';
 import ButtonGroup from '@marketgoo/ola/dist/ButtonGroup';
+import CustomOlaModal from './CustomOlaModal';
 
 const ConfirmModal = props => {
     return (
-        <Modal open={props.isOpen} onClose={props.onCancel}>
+        <CustomOlaModal open={props.isOpen} onClose={props.onCancel}>
             <ModalHeader title={props.title} />
             <ModalContent>
                 <p>{props.question}</p>
@@ -17,7 +17,7 @@ const ConfirmModal = props => {
                     </Button>
                 </ButtonGroup>
             </ModalContent>
-        </Modal>
+        </CustomOlaModal>
     );
 };
 
