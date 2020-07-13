@@ -7,6 +7,10 @@
     margin-bottom: 20px;
 }
 
+.fieldInput {
+    margin-bottom: 20px;
+}
+
 .overlay {
     display: none;
     position: fixed;
