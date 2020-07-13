@@ -15,6 +15,7 @@ const ListItem = props => {
 
     return (
         <TableRow check={null} checked={false}>
+            <TableCell header={false}>{props.position}</TableCell>
             <TableCell header={false}>{props.item.name}</TableCell>
             <TableCell header={false}>{props.item.team}</TableCell>
             <TableCell header={false}>{props.item.score}</TableCell>

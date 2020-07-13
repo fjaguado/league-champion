@@ -10,6 +10,7 @@ const List = props => {
         <Table responsive={false} sticky={false} stiky>
             <thead>
                 <TableRow check={null} checked={false}>
+                    <TableCell header>#</TableCell>
                     <TableCell header>Player</TableCell>
                     <TableCell header>Team</TableCell>
                     <TableCell header>Score</TableCell>
@@ -27,7 +28,11 @@ const List = props => {
                     </tr>
                 ) : (
                     props.items &&
-                    props.items.map(item => <ListItem item={item} onDelete={props.onDelete} />)
+                    props.items
+                        .sort((a, b) => b.score - a.score)
+                        .map((item, index) => (
+                            <ListItem position={index + 1} item={item} onDelete={props.onDelete} />
+                        ))
                 )}
             </tbody>
         </Table>

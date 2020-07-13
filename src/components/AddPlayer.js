@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import Modal from '@marketgoo/ola/dist/Modal';
+import React, { useEffect, useState } from 'react';
 import ModalHeader from '@marketgoo/ola/dist/Modal/Header';
 import ModalContent from '@marketgoo/ola/dist/Modal/Content';
-import Field from '@marketgoo/ola/dist/Field';
 import Button from '@marketgoo/ola/dist/Button';
 import FieldInput from './FieldInput';
 import CustomOlaModal from './CustomOlaModal';

@@ -1,3 +1,8 @@
+#app {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 .title {
     color: var(--brand);
     text-align: center;
