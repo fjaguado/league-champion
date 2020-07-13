@@ -8,6 +8,7 @@ import AddPlayer from './AddPlayer';
 import Button from '@marketgoo/ola/dist/Button';
 import Panel from '@marketgoo/ola/dist/Panel';
 import PanelContent from '@marketgoo/ola/dist/Panel/Content';
+import LoadingOverlay from './LoadingOverlay';
 
 class Players extends Component {
     constructor(props) {
@@ -36,7 +37,9 @@ class Players extends Component {
 
     async addNewPlayer(player) {
         this.setState({ isAddPlayerFormVisible: false });
+        this.setState({ isLoading: true });
         await this.props.onAddPlayer(player);
+        this.setState({ isLoading: false });
     }
 
     render() {
@@ -64,6 +67,7 @@ class Players extends Component {
                         />
                     </PanelContent>
                 </Panel>
+                <LoadingOverlay show={this.state.isLoading} />
             </>
         );
     }
