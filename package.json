@@ -17,7 +17,7 @@
     "dialog-polyfill": "^0.5.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jest": "^26.1.0",
     "node-cron": "^2.0.3",
     "prop-types": "^15.7.2",
